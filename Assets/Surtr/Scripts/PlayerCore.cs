@@ -54,7 +54,7 @@ public class PlayerCore : MonoBehaviour
 
         model.attackState.Update(this);
 
-        if (!model.attackInput)
+        if (model.attackState == model.atkStateDefault)
         {
             //If not in attack, normal move, jump, and dash
             model.horizontalMovement = Input.GetAxisRaw("Horizontal") * model.moveSpeed * 1;
@@ -86,6 +86,14 @@ public class PlayerCore : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //grounding the player
+        if (collision.gameObject.tag == "ground")
+        {
+            model.isGrounded = true;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
         if (collision.gameObject.tag == "ground")
         {
             model.isGrounded = true;

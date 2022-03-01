@@ -8,12 +8,15 @@ public class PAStateB : PlayerAttackStateBase
     [SerializeField] private float frameCounter;
     [SerializeField] private float maxFrameNum = 0.333f;
     [SerializeField] private bool hasCombo = false;
+    [SerializeField] private GameObject attackB;
+
     public override void EnterState(PlayerCore pl)
     {
         frameCounter = maxFrameNum;
         hasCombo = false;
         pl.model.attackAanim = true;
         pl.model.playerAnim.SetBool(pl.model.isAttackBHash, pl.model.attackAanim);
+        attackB.SetActive(true);
     }
 
     public override void Update(PlayerCore pl)
@@ -38,5 +41,6 @@ public class PAStateB : PlayerAttackStateBase
         pl.model.comboCount = 2;
         pl.model.attackAanim = false;
         pl.model.playerAnim.SetBool(pl.model.isAttackBHash, pl.model.attackAanim);
+        attackB.SetActive(false);
     }
 }
