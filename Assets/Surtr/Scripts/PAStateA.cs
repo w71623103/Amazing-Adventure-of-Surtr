@@ -9,6 +9,8 @@ public class PAStateA : PlayerAttackStateBase
     [SerializeField] private float maxFrameNum = 0.417f;
     [SerializeField] private bool hasCombo = false;
     [SerializeField] private GameObject attackA;
+    [SerializeField] private GameObject pos;
+    private GameObject newAttack;
 
     public override void EnterState(PlayerCore pl)
     {
@@ -16,7 +18,8 @@ public class PAStateA : PlayerAttackStateBase
         hasCombo = false;
         pl.model.attackAanim = true;
         pl.model.playerAnim.SetBool(pl.model.isAttackAHash, pl.model.attackAanim);
-        attackA.SetActive(true);
+        //attackA.SetActive(true);
+        newAttack = GameObject.Instantiate(attackA,pos.transform.position,Quaternion.identity);
     }
 
     public override void Update(PlayerCore pl)
@@ -38,7 +41,8 @@ public class PAStateA : PlayerAttackStateBase
 
     public override void LeaveState(PlayerCore pl)
     {
-        attackA.SetActive(false);
+        //attackA.SetActive(false);
+        MonoBehaviour.Destroy(newAttack);
         pl.model.comboCount = 1;
         pl.model.attackAanim = false;
         pl.model.playerAnim.SetBool(pl.model.isAttackAHash, pl.model.attackAanim);

@@ -22,6 +22,21 @@ public class PlayerCore : MonoBehaviour
         }
     }
 
+    public void ChangeDashState(PlayerDashStateBase newState)
+    {
+        if (model.dashState != null)
+        {
+            model.dashState.LeaveState(this);
+        }
+
+        model.dashState = newState;
+
+        if (model.dashState != null)
+        {
+            model.dashState.EnterState(this);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +53,8 @@ public class PlayerCore : MonoBehaviour
         model.isMovingHash = Animator.StringToHash("isMoving");
 
         model.isJumpHash = Animator.StringToHash("isGrounded");
+        model.isDashHash = Animator.StringToHash("isDashing");
+        model.dashState = model.dStateDefault;
     }
 
     // Update is called once per frame
@@ -45,25 +62,31 @@ public class PlayerCore : MonoBehaviour
     {
         //Timers========================================
         model.jumpTimer -= Time.deltaTime;
-
+        
         //==============================================
 
         model.playerAnim.SetBool(model.isJumpHash, model.isGrounded);
 
         model.attackInput = Input.GetKeyDown(KeyCode.J);
+        model.dashInput = Input.GetKeyDown(KeyCode.Space);
 
         model.attackState.Update(this);
+        
 
-        if (model.attackState == model.atkStateDefault)
+        if (model.dashState == model.dStateDefault)
         {
-            //If not in attack, normal move, jump, and dash
-            model.horizontalMovement = Input.GetAxisRaw("Horizontal") * model.moveSpeed * 1;
+            if (model.attackState == model.atkStateDefault)
+            {
+                //If not in attack, normal move, jump, and dash
+                model.horizontalMovement = Input.GetAxisRaw("Horizontal") * model.moveSpeed * 1;
+            }
+            else
+            {
+                //If is attacking, half move speed, no jump, dash break attack chain
+                model.horizontalMovement = Input.GetAxisRaw("Horizontal") * model.moveSpeed * model.attackingMovingFactor;
+            }
         }
-        else 
-        {
-            //If is attacking, half move speed, no jump, dash break attack chain
-            model.horizontalMovement = Input.GetAxisRaw("Horizontal") * model.moveSpeed * model.attackingMovingFactor;
-        }
+        
 
         model.playerAnim.SetBool(model.isMovingHash, model.horizontalMovement != 0);
 
@@ -81,6 +104,9 @@ public class PlayerCore : MonoBehaviour
     {
         controller.hMovement();
         controller.Jump();
+        //model.isDashing = controller.Dash();
+        model.dashState.Update(this);
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

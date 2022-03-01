@@ -9,6 +9,8 @@ public class PAStateB : PlayerAttackStateBase
     [SerializeField] private float maxFrameNum = 0.333f;
     [SerializeField] private bool hasCombo = false;
     [SerializeField] private GameObject attackB;
+    [SerializeField] private GameObject pos;
+    private GameObject newAttack;
 
     public override void EnterState(PlayerCore pl)
     {
@@ -16,7 +18,8 @@ public class PAStateB : PlayerAttackStateBase
         hasCombo = false;
         pl.model.attackAanim = true;
         pl.model.playerAnim.SetBool(pl.model.isAttackBHash, pl.model.attackAanim);
-        attackB.SetActive(true);
+        //attackB.SetActive(true);
+        newAttack = GameObject.Instantiate(attackB, pos.transform.position, Quaternion.identity);
     }
 
     public override void Update(PlayerCore pl)
@@ -38,9 +41,10 @@ public class PAStateB : PlayerAttackStateBase
 
     public override void LeaveState(PlayerCore pl)
     {
+        MonoBehaviour.Destroy(newAttack);
         pl.model.comboCount = 2;
         pl.model.attackAanim = false;
         pl.model.playerAnim.SetBool(pl.model.isAttackBHash, pl.model.attackAanim);
-        attackB.SetActive(false);
+        //attackB.SetActive(false);
     }
 }

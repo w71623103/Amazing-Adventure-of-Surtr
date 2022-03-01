@@ -50,4 +50,21 @@ public class PlayerController
         }
 
     }
+
+    /*public bool Dash()
+    {
+        if (model.dashTimer < 0)
+        {
+            if (Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.S)) //on the ground and get the input
+            {
+                model.dashTimer = model.dashCD; //reset timer
+
+                model.playerRB.AddForce(new Vector2(model.dashSpeed, 0f), ForceMode2D.Impulse); //jump
+
+                return true;
+            }
+        }
+        
+        return false;
+    }*/
 }

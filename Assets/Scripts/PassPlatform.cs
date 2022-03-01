@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PassPlatform : MonoBehaviour
 {
-    public GameObject box;
-    public bool startDeActivate = false;
-    public float timer = 0.1f;
-    public bool fallingKeyPressed;
-    public float detectTimer = 0f;
-    public float sensorCD = 0.3f;
+    [SerializeField] private GameObject box;
+    [SerializeField] private bool startDeActivate = false;
+    [SerializeField] private float timer = 0.1f;
+    [SerializeField] private bool fallingKeyPressed;
+    [SerializeField] private float detectTimer = 0f;
+    [SerializeField] private float sensorCD = 0.3f;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,26 +28,31 @@ public class PassPlatform : MonoBehaviour
             timer = 0.3f;
         }
         fallingKeyPressed = Input.GetKey(KeyCode.S)/* && Input.GetKeyDown(KeyCode.K)*/;
+       
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         detectTimer = sensorCD;
-        //Debug.Log("llllllllllllanding");
-        if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent <PlayerCore>().model.playerRB.velocity.y < 0f && !startDeActivate)
+        
+        if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<PlayerCore>().model.playerRB.velocity.y <= 0f && !startDeActivate)
         {
-            
+
             startDeActivate = false;
             box.SetActive(true);
-            
+
+        }
+        else if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<PlayerCore>().model.playerRB.velocity.y > 0f && !startDeActivate)
+        {
+            box.SetActive(false);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (detectTimer < 0f)
+        if (detectTimer < 0f /*&& !transform.Find("Left").GetComponent<PassPlatformHorizontalLimit>().isTouching(collision) && !transform.Find("Right").GetComponent<PassPlatformHorizontalLimit>().isTouching(collision)*/)
         {
-            Debug.Log("I'm leaving");
+            //Debug.Log("I'm leaving");
             if (collision.gameObject.tag == "Player")
             {
                 startDeActivate = true;

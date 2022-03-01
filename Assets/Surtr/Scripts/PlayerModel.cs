@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerModel
 {
     public bool attackInput;
-
     public PlayerAttackStateBase attackState;
     public PAStateA atkStateA = new PAStateA();
     public PAStateB atkStateB = new PAStateB();
@@ -41,4 +40,13 @@ public class PlayerModel
     public float jumpSpeed = 5f;
     public float jumpCD = 0.5f;
     public int isJumpHash;
+
+    public bool dashInput;
+    public PlayerDashStateBase dashState;
+    public PlayerDashStateDefault dStateDefault = new PlayerDashStateDefault();
+    public PlayerDashStateDash dStateDash = new PlayerDashStateDash();
+    public int isDashHash;
+    public float dashSpeed = 5f;
+
+    public bool isVulnerable = true;
 }
