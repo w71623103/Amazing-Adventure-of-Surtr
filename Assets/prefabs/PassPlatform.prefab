@@ -240,3 +240,5 @@ MonoBehaviour:
   startDeActivate: 0
   timer: 0.1
   fallingKeyPressed: 0
+  detectTimer: 0
+  sensorCD: 0.2

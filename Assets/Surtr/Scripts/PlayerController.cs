@@ -45,7 +45,7 @@ public class PlayerController
             {
                 model.jumpTimer = model.jumpCD * 0.1f; //reset timer with a very minimum time
 
-                model.playerRB.AddForce(new Vector2(0, model.jumpSpeed * 0.2f), ForceMode2D.Impulse); //jump with a very small force
+                model.playerRB.AddForce(new Vector2(0, model.jumpSpeed * 0.3f), ForceMode2D.Impulse); //jump with a very small force
             }
         }
 

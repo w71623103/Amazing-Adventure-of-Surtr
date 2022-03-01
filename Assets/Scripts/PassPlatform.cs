@@ -8,6 +8,8 @@ public class PassPlatform : MonoBehaviour
     public bool startDeActivate = false;
     public float timer = 0.1f;
     public bool fallingKeyPressed;
+    public float detectTimer = 0f;
+    public float sensorCD = 0.3f;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,53 +19,42 @@ public class PassPlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        detectTimer -= Time.deltaTime;
         if(startDeActivate) timer -= Time.deltaTime;
-        if(timer < 0) box.SetActive(false);
-        //fallingKeyPressed = Input.GetKey(KeyCode.S)/* && Input.GetKeyDown(KeyCode.K)*/;
+        if (timer < 0)
+        {
+            box.SetActive(false);
+            startDeActivate = false;
+            timer = 0.3f;
+        }
+        fallingKeyPressed = Input.GetKey(KeyCode.S)/* && Input.GetKeyDown(KeyCode.K)*/;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent <PlayerCore>().model.playerRB.velocity.y <= 0f && !fallingKeyPressed)
+        detectTimer = sensorCD;
+        //Debug.Log("llllllllllllanding");
+        if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent <PlayerCore>().model.playerRB.velocity.y < 0f && !startDeActivate)
         {
+            
             startDeActivate = false;
             box.SetActive(true);
-            timer = 0.1f;
+            
         }
-
-        /*if (collision.gameObject.tag == "Player" && collision.transform.position.y > transform.position.y)
-        {
-            //Debug.Log("CanFall");
-            if (*//*Input.GetKeyDown(KeyCode.S) && Input.GetKeyDown(KeyCode.K)Input.GetKeyDown(KeyCode.Tab)*//*fallingKeyPressed)
-            {
-                startDeActivate = true;
-                timer = 0.05f;
-            }
-        }*/
     }
-
-    /*private void OnTriggerStay2D(Collider2D collision)
-    {
-        
-        if (collision.gameObject.tag == "Player" && collision.transform.position.y > transform.position.y)
-        {
-            //Debug.Log("CanFall");
-            if (*//*Input.GetKeyDown(KeyCode.S) && Input.GetKeyDown(KeyCode.K)Input.GetKeyDown(KeyCode.Tab)*//*fallingKeyPressed)
-            {
-                startDeActivate = true;
-                timer = 0.05f;
-            }
-        }
-        
-    }*/
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (detectTimer < 0f)
         {
-            startDeActivate = true;
-            timer = 0.5f;
+            Debug.Log("I'm leaving");
+            if (collision.gameObject.tag == "Player")
+            {
+                startDeActivate = true;
+                timer = 0.3f;
+            }
         }
+        
     }
 
 
