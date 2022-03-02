@@ -71,7 +71,7 @@ public class PlayerCore : MonoBehaviour
         model.dashInput = Input.GetKeyDown(KeyCode.Space);
 
         model.attackState.Update(this);
-        
+        model.dashState.Update(this);
 
         if (model.dashState == model.dStateDefault)
         {
@@ -105,11 +105,11 @@ public class PlayerCore : MonoBehaviour
         controller.hMovement();
         controller.Jump();
         //model.isDashing = controller.Dash();
-        model.dashState.Update(this);
+        
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    /*private void OnCollisionEnter2D(Collision2D collision)
     {
         //grounding the player
         if (collision.gameObject.tag == "ground")
@@ -133,5 +133,5 @@ public class PlayerCore : MonoBehaviour
         {
             model.isGrounded = false;
         }
-    }
+    }*/
 }

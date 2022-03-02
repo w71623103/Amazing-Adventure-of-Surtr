@@ -48,5 +48,5 @@ public class PlayerModel
     public int isDashHash;
     public float dashSpeed = 5f;
 
-    public bool isVulnerable = true;
+
 }

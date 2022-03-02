@@ -20,6 +20,7 @@ public class PAStateB : PlayerAttackStateBase
         pl.model.playerAnim.SetBool(pl.model.isAttackBHash, pl.model.attackAanim);
         //attackB.SetActive(true);
         newAttack = GameObject.Instantiate(attackB, pos.transform.position, Quaternion.identity);
+        newAttack.transform.localScale = new Vector3(pl.transform.localScale.x * newAttack.transform.localScale.x, newAttack.transform.localScale.y, newAttack.transform.localScale.z);
     }
 
     public override void Update(PlayerCore pl)

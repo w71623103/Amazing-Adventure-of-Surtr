@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ground
   - Enemy
+  - passPlatform
   layers:
   - Default
   - TransparentFX
@@ -13,8 +14,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - passPlatforms
+  - noPass
   - 
   - 
   - 
