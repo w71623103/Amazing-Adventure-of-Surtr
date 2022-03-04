@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8630488672621096400}
   - component: {fileID: 471616830437377330}
   - component: {fileID: 4746223367802814635}
+  - component: {fileID: 1633910717}
   m_Layer: 0
   m_Name: lowerCol
   m_TagString: Untagged
@@ -111,6 +112,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1633910717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879591761593228764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd1c55c85707934a85f89e330fdde43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6254486867330156107
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +220,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -289,6 +302,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model:
+    hp: 0
+    maxhp: 100
     attackInput: 0
     atkStateA:
       frameCounter: 0
@@ -335,12 +350,15 @@ MonoBehaviour:
     dashInput: 0
     dStateDefault:
       noDashTimer: 0
-      DashCD: 1.25
+      DashCD: 1
     dStateDash:
       frameCounter: 0
       maxFrameNum: 0.417
     isDashHash: 0
-    dashSpeed: 25
+    dashSpeed: 40
+    healTimer: 0
+    healCD: 1
+    healEffect: {fileID: 8388745730598283192, guid: e40847c7d3addbb4fa65a0762001fca6, type: 3}
 --- !u!212 &6812020497732847913
 SpriteRenderer:
   m_ObjectHideFlags: 0

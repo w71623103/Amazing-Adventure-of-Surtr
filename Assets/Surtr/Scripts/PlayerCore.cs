@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCore : MonoBehaviour
+public class PlayerCore : Core
 {
     public PlayerModel model = new PlayerModel();
     private PlayerController controller;
@@ -55,6 +55,10 @@ public class PlayerCore : MonoBehaviour
         model.isJumpHash = Animator.StringToHash("isGrounded");
         model.isDashHash = Animator.StringToHash("isDashing");
         model.dashState = model.dStateDefault;
+
+        model.inventory.Add("heal", false);
+        model.inventory.Add("combo", false);
+        model.hp = model.maxhp;
     }
 
     // Update is called once per frame
@@ -62,7 +66,7 @@ public class PlayerCore : MonoBehaviour
     {
         //Timers========================================
         model.jumpTimer -= Time.deltaTime;
-        
+        model.healTimer -= Time.deltaTime;
         //==============================================
 
         model.playerAnim.SetBool(model.isJumpHash, model.isGrounded);
@@ -72,6 +76,16 @@ public class PlayerCore : MonoBehaviour
 
         model.attackState.Update(this);
         model.dashState.Update(this);
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            controller.collectItem(this);
+        }
+
+        if (Input.GetKeyDown(KeyCode.R) && model.dashState == model.dStateDefault && model.attackState == model.atkStateDefault)
+        {
+            controller.heal(this);
+        }
 
         if (model.dashState == model.dStateDefault)
         {
@@ -134,4 +148,9 @@ public class PlayerCore : MonoBehaviour
             model.isGrounded = false;
         }
     }*/
+
+    public override float getHpPer()
+    {
+        return model.hp / model.maxhp;
+    }
 }

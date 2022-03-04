@@ -23,7 +23,7 @@ public class PAStateT : PlayerAttackStateBase
         {
             pl.ChangeAttackState(pl.model.atkStateDefault);
         }
-        if (hasCombo)
+        if (hasCombo && pl.model.inventory["combo"])
         {
             switch (pl.model.comboCount)
             {

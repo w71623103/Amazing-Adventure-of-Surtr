@@ -25,7 +25,7 @@ public class PAStateA : PlayerAttackStateBase
 
     public override void Update(PlayerCore pl)
     {
-        if(pl.model.attackInput) hasCombo = true;
+        if(pl.model.attackInput && pl.model.inventory["combo"]) hasCombo = true;
 
         if (frameCounter <= 0f)
         {

@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class PlayerModel
+public class PlayerModel : Model
 {
+    /*public new float hp;
+    public new float maxhp = 100f;*/
+
     public bool attackInput;
     public PlayerAttackStateBase attackState;
     public PAStateA atkStateA = new PAStateA();
@@ -48,5 +51,9 @@ public class PlayerModel
     public int isDashHash;
     public float dashSpeed = 5f;
 
+    public Dictionary<string, bool> inventory = new Dictionary<string, bool>();
 
+    public float healTimer;
+    public float healCD = 1f;
+    public GameObject healEffect;
 }

@@ -21,7 +21,6 @@ public class PlayerController
             else if (model.horizontalMovement > 0)
                 model.isLeft = false;
         }
-        
     }
 
     public void hMovement()
@@ -51,20 +50,30 @@ public class PlayerController
 
     }
 
-    /*public bool Dash()
+    public void collectItem(PlayerCore pl)
     {
-        if (model.dashTimer < 0)
+        RaycastHit2D hit = Physics2D.Raycast(pl.transform.position, Vector2.down, Mathf.Infinity, LayerMask.GetMask("collectable"));
+        
+        if (hit.collider != null)
         {
-            if (Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.S)) //on the ground and get the input
+            if (hit.collider.CompareTag("collectable"))
             {
-                model.dashTimer = model.dashCD; //reset timer
-
-                model.playerRB.AddForce(new Vector2(model.dashSpeed, 0f), ForceMode2D.Impulse); //jump
-
-                return true;
+                model.inventory[hit.collider.gameObject.GetComponent<collectable>().type] = true;
+                hit.collider.gameObject.SetActive(false);
             }
         }
-        
-        return false;
-    }*/
+    }
+
+    public void heal(PlayerCore pl)
+    {
+        if (model.inventory["heal"] && model.healTimer <= 0f && model.hp < model.maxhp)
+        {
+            Object.Instantiate(model.healEffect, pl.transform.position, Quaternion.identity);
+            model.healTimer = model.healCD;
+            if (model.hp + 10 < model.maxhp)
+                model.hp += 10f;
+            else
+                model.hp = model.maxhp;
+        }
+    }
 }
