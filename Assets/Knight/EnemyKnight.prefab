@@ -307,6 +307,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1826802149479978433, guid: 193b24669470a904da2b1ddb54305ba2, type: 3}
+      propertyPath: model.atkStateCD.maxFrameNum
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1826802149479978434, guid: 193b24669470a904da2b1ddb54305ba2, type: 3}
       propertyPath: m_SortingOrder
       value: 55

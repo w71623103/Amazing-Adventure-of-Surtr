@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class PGStateDead : PlayerGeneralStateBase
@@ -9,6 +10,8 @@ public class PGStateDead : PlayerGeneralStateBase
     [SerializeField] private float maxFrameNum = 0.333f;*/
     public override void EnterState(PlayerCore pl) 
     {
+        pl.model.hp = pl.model.maxhp;
+        SceneManager.LoadScene("first");
         /*frameCounter = maxFrameNum; ;
         //pl.model.playerAnim.SetBool(pl.model.isDeadHash, true);
         pl.model.horizontalMovement = 0f;

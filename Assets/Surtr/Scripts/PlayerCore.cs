@@ -161,7 +161,7 @@ public class PlayerCore : MonoBehaviour
 
     public float getHpPer()
     {
-        return model.hp / model.maxhp;
+        return model.hp <= 0? 0.1f : model.hp / model.maxhp;
     }
 
     public void takeDamage(float dmg, float x)
