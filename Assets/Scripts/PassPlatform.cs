@@ -27,14 +27,14 @@ public class PassPlatform : MonoBehaviour
     {
         detectTimer = sensorCD;
 
-        if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<PlayerCore>().model.playerRB.velocity.y <= 0f && !startDeActivate)
+        if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<PlayerCore>().model.characterRB.velocity.y <= 0f && !startDeActivate)
         {
 
             startDeActivate = false;
             box.SetActive(true);
 
         }
-        else if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<PlayerCore>().model.playerRB.velocity.y > 0f && !startDeActivate)
+        else if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<PlayerCore>().model.characterRB.velocity.y > 0f && !startDeActivate)
         {
             box.SetActive(false);
 

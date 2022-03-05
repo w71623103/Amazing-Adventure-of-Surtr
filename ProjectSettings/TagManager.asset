@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - passPlatform
   - collectable
+  - movLimit
   layers:
   - Default
   - TransparentFX

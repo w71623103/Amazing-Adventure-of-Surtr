@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 6812020497732847914}
   - component: {fileID: 6812020497732847917}
   - component: {fileID: 6812020497732847918}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Surtr
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6812020497732847915}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.743, y: 0.524, z: 0}
+  m_LocalPosition: {x: 1.16, y: 0.213, z: 5.829261}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -337,7 +337,7 @@ MonoBehaviour:
     isAttackCHash: 0
     isAttackTHash: 0
     attackingMovingFactor: 0.7
-    playerRB: {fileID: 0}
+    characterRB: {fileID: 0}
     horizontalMovement: 0
     moveSpeed: 1.2
     isLeft: 0
@@ -359,6 +359,19 @@ MonoBehaviour:
     healTimer: 0
     healCD: 1
     healEffect: {fileID: 8388745730598283192, guid: e40847c7d3addbb4fa65a0762001fca6, type: 3}
+    healNum: 3
+    healUI:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    healUIP: {fileID: 0}
+    hitForce: 1
+    gStateDamage1:
+      frameCounter: 0
+      maxFrameNum: 0.5
+    gStateDamage2:
+      frameCounter: 0
+      maxFrameNum: 0.5
 --- !u!212 &6812020497732847913
 SpriteRenderer:
   m_ObjectHideFlags: 0

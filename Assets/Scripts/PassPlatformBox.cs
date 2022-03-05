@@ -19,7 +19,7 @@ public class PassPlatformBox : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            if (collision.gameObject.GetComponent<PlayerCore>().model.playerRB.velocity.y > 0)
+            if (collision.gameObject.GetComponent<PlayerCore>().model.characterRB.velocity.y > 0)
             {
                 gameObject.SetActive(false);
             }

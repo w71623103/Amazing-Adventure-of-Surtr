@@ -25,7 +25,7 @@ public class PlayerController
 
     public void hMovement()
     {
-        model.playerRB.velocity = new Vector2(model.horizontalMovement, model.playerRB.velocity.y);
+        model.characterRB.velocity = new Vector2(model.horizontalMovement, model.characterRB.velocity.y);
     }
 
     //control jump
@@ -38,7 +38,7 @@ public class PlayerController
             {
                 model.jumpTimer = model.jumpCD; //reset timer
                 
-                model.playerRB.AddForce(new Vector2(0, model.jumpSpeed), ForceMode2D.Impulse); //jump
+                model.characterRB.AddForce(new Vector2(0, model.jumpSpeed), ForceMode2D.Impulse); //jump
             }
             /*else if (Input.GetKey(KeyCode.K) && model.isGrounded && Input.GetKey(KeyCode.S)) //on the ground and get the input
             {
@@ -59,6 +59,10 @@ public class PlayerController
             if (hit.collider.CompareTag("collectable"))
             {
                 model.inventory[hit.collider.gameObject.GetComponent<collectable>().type] = true;
+                if(hit.collider.gameObject.GetComponent<collectable>().type == "heal")
+                {
+                    model.healUIP.SetActive(true);
+                }
                 hit.collider.gameObject.SetActive(false);
             }
         }
@@ -66,14 +70,17 @@ public class PlayerController
 
     public void heal(PlayerCore pl)
     {
-        if (model.inventory["heal"] && model.healTimer <= 0f && model.hp < model.maxhp)
+        if (model.inventory["heal"] && model.healTimer <= 0f && model.hp < model.maxhp && model.healNum > 0)
         {
             Object.Instantiate(model.healEffect, pl.transform.position, Quaternion.identity);
             model.healTimer = model.healCD;
-            if (model.hp + 10 < model.maxhp)
-                model.hp += 10f;
+            if (model.hp + 35 < model.maxhp)
+                model.hp += 35;
             else
                 model.hp = model.maxhp;
+            model.healUI[model.healNum - 1].SetActive(false);
+            model.healNum--;
+            
         }
     }
 }

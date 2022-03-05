@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class PlayerModel : Model
+public class PlayerModel
 {
-    /*public new float hp;
-    public new float maxhp = 100f;*/
+    public float hp;
+    public float maxhp = 100f;
 
     public bool attackInput;
     public PlayerAttackStateBase attackState;
@@ -31,7 +31,7 @@ public class PlayerModel : Model
 
     public float attackingMovingFactor = 0.1f;
 
-    public Rigidbody2D playerRB;
+    public Rigidbody2D characterRB;
     public float horizontalMovement = 0f;
     public float moveSpeed = 2f;
     public bool isLeft = false;
@@ -56,4 +56,14 @@ public class PlayerModel : Model
     public float healTimer;
     public float healCD = 1f;
     public GameObject healEffect;
+    public int healNum = 3;
+    public GameObject[] healUI = new GameObject[3];
+    public GameObject healUIP;
+
+    public float hitForce = 1f;
+    public PlayerGeneralStateBase generalState;
+    public PGStateDefault gStateDefault = new PGStateDefault();
+    public PGStateDamage1 gStateDamage1 = new PGStateDamage1();
+    public PGStateDamage2 gStateDamage2 = new PGStateDamage2();
+    public PGStateDead gStateDead = new PGStateDead();
 }
